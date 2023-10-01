@@ -8,16 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LepschiAl/Website.git"
-  },
-  "bugs": {
-    "url": "https://github.com/LepschiAl/Website/issues"
-  },
-  "homepage": "https://github.com/LepschiAl/Website#readme",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mysql": "^2.18.1"
