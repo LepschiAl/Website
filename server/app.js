@@ -6,6 +6,8 @@ const path = require("path");
 const {response} = require("express");
 env.config();
 
+const db = require('./database');
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended : false}));
