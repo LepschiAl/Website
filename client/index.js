@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-    /*fetch('http://localhost:5000/getAll')
+    fetch('http://localhost:3000/getAll')
         .then(response => response.json())
-        .then(data => loadHTMLTable(data['data']));
-*/
-    loadHTMLTable([]);
+        .then(data => console.log(data));
+        loadHTMLTable([]);
 });
 
 function loadHTMLTable(data) {
@@ -15,7 +14,7 @@ function loadHTMLTable(data) {
 
     let tableHtml = "";
 
-    /*data.forEach(function ({id, name, date_added}) {
+    data.forEach(function ({id, name, date_added}) {
         tableHtml += "<tr>";
         tableHtml += `<td>${id}</td>`;
         tableHtml += `<td>${name}</td>`;
@@ -23,7 +22,7 @@ function loadHTMLTable(data) {
         tableHtml += `<td><button class="delete-row-btn" data-id=${id}>Delete</td>`;
         tableHtml += `<td><button class="edit-row-btn" data-id=${id}>Edit</td>`;
         tableHtml += "</tr>";
-    });*/
+    });
 
     table.innerHTML = tableHtml;
 }
