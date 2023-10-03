@@ -15,8 +15,10 @@ app.use(express.urlencoded({ extended : false}));
 app.use(express.static(path.join(__dirname,'../', '/client')))
 
 // create
-app.post('/insert', (req, res) =>{
-    console.log(req.body);
+app.post('/insert', (req, res, next) =>{
+    const { name } = req.body;
+    console.log("name: ", name);
+    return res.redirect('/');
 });
 // read
 app.get('/getAll', (req, res) => {
