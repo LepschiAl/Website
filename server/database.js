@@ -1,6 +1,9 @@
 const mysql = require('mysql');
 const dotenv = require('dotenv');
+const {response} = require("express");
 dotenv.config();
+
+let instance = null;
 
 const connection = mysql.createConnection({
     /*host:process.env.HOST,
@@ -23,4 +26,27 @@ connection.connect((err => {
     else{
         console.log("connected!");
     }
-}))
+}));
+
+class Database{
+    static getInstance(){
+        return instance ? instance : new Database();
+    }
+
+    async getAllData() {
+        try{
+            const response = await new Promise((resolve, reject) =>{
+               const query = 'select * from name;';
+               connection.query(query,(err, results) =>{
+                   if (err) reject(new Error(err.message));
+                   resolve(results);
+               })
+            });
+            return response;
+        }catch (err){
+            console.log("error!" +err.message);
+        }
+    }
+}
+
+module.exports = Database;

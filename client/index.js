@@ -1,11 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
     fetch('http://localhost:3000/getAll')
         .then(response => response.json())
-        .then(data => console.log(data));
-        loadHTMLTable([]);
+        .then(data => loadHTMLTable(data['data']));
 });
 
+
+const addBtn = document.getElementById("add-name-btn");
+addBtn.onclick = function (){
+    const nameInput = document.querySelector('#name-input');
+    //console.log("name:"+nameInput);
+    const name = nameInput.value;
+
+    // reset nameInput value
+    nameInput.value = "";
+
+    fetch('http://localhost:3000/insert', {
+
+        headers: {
+            'Content-type' : 'application/json'
+        },
+        method : 'POST',
+        //body: JSON.stringify({name : name})
+        body: JSON.stringify({name})
+    })
+        .then(response => response.json())
+        .then(data => insertRowIntoTable(data['data']));
+}
+
+function insertRowIntoTable(data){
+
+}
 function loadHTMLTable(data) {
+    console.log("Data:"+ data);
     const table = document.querySelector('table tbody');
 
     if (data.length === 0) {

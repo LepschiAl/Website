@@ -6,7 +6,7 @@ const path = require("path");
 const {response} = require("express");
 env.config();
 
-const db = require('./database');
+const Database = require("./database");
 
 app.use(cors());
 app.use(express.json());
@@ -16,13 +16,17 @@ app.use(express.static(path.join(__dirname,'../', '/client')))
 
 // create
 app.post('/insert', (req, res) =>{
-
+    console.log(req.body);
 });
 // read
 app.get('/getAll', (req, res) => {
-    res.json({
-        success: true
-    });
+    const db = Database.getInstance();
+
+    const result = db.getAllData();
+
+    result.then(data => res.json({data : data}))
+        .catch(err => console.log("error in app" +err.message));
+
 });
 
 app.get('/', (req, res) => {
