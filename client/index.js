@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/*
 const addBtn = document.getElementById("add-name-btn");
 addBtn.onclick = function (){
     const nameInput = document.querySelector('#name-input');
@@ -26,6 +27,7 @@ addBtn.onclick = function (){
         .then(response => response.json())
         .then(data => insertRowIntoTable(data['data']));
 }
+*/
 
 function insertRowIntoTable(data){
 
