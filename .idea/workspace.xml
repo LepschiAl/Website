@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27debb9a-8a51-4671-91b1-05040d7600a3" name="Changes" comment="implemented POST method for Button &quot;add Name&quot;">
-      <change beforePath="$PROJECT_DIR$/client/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.env" beforeDir="false" afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/database.js" afterDir="false" />
-    </list>
+    <list default="true" id="27debb9a-8a51-4671-91b1-05040d7600a3" name="Changes" comment="implemented POST method for Button &quot;add Name&quot;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +106,7 @@
       <workItem from="1696185337426" duration="6286000" />
       <workItem from="1696227042271" duration="84000" />
       <workItem from="1696227135970" duration="2318000" />
-      <workItem from="1696231180636" duration="24230000" />
+      <workItem from="1696231180636" duration="24614000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
