@@ -16,7 +16,13 @@ app.use(express.static(path.join(__dirname,'../', '/client')))
 
 // create
 app.post('/insert', (req, res) =>{
-    console.log(req.body);
+    const {name} = req.body;
+
+    const db = Database.getInstance();
+    const result = db.insertName(name);
+
+    result.then(data => res.json({success : true}))
+        .catch(err => console.log(err));
 });
 // read
 app.get('/getAll', (req, res) => {

@@ -1,3 +1,7 @@
+/*
+    drop database name;
+    create table name(id int not null primary key auto_increment, name varchar(30), date DATE);
+ */
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const {response} = require("express");
@@ -6,17 +10,11 @@ dotenv.config();
 let instance = null;
 
 const connection = mysql.createConnection({
-    /*host:process.env.HOST,
-    user:process.env.USER,
-    password:process.env.PASSWORD,
-    database:process.env.DATABASE,
-    port:process.env.DB_PORT*/
-
-    host: 'localhost',
-    user: 'website',
-    password: 'test123',
-    database: 'website',
-    port: '3306'
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE,
+    port: process.env.DB_PORT
 });
 
 connection.connect((err => {
@@ -36,7 +34,7 @@ class Database{
     async getAllData() {
         try{
             const response = await new Promise((resolve, reject) =>{
-               const query = 'select * from name;';
+               const query = 'SELECT * FROM name;';
                connection.query(query,(err, results) =>{
                    if (err) reject(new Error(err.message));
                    resolve(results);
@@ -44,8 +42,49 @@ class Database{
             });
             return response;
         }catch (err){
-            console.log("error!" +err.message);
+            console.log("err in getAllData()" +err.message);
         }
+    }
+
+    async insertName(name) {
+        if (await this.verifyName(name)){
+            try{
+                const date = new Date();
+                const insertId = await new Promise((resolve,reject) => {
+                    const  query = "INSERT INTO name(name,date) VALUES (? ,?);";
+                    connection.query(query,[name, date] , (err, result) => {
+                        if (err) {
+                            reject(new Error(err.message));
+                        }
+                        else{
+                            resolve(result.insertId);
+                        }
+
+                    });
+                });
+                console.log(insertId);
+                return response;
+            }catch (err){
+                console.log("err in insertName()" +err.message);
+            }
+        }
+    }
+
+    async verifyName(newName){
+        const response = await new Promise((resolve, reject) =>{
+
+            const query = "SELECT * FROM name WHERE name = ?;";
+            connection.query(query,[newName], (err, results) =>{
+                if (err) reject(new Error(err.message));
+                resolve(results);
+            })
+        });
+        if (response.length !== 0){
+            console.log("name exists!");
+            return false;
+        }
+        // Return true if name does not exist
+        return true;
     }
 }
 
