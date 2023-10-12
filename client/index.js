@@ -31,27 +31,47 @@ addBtn.onclick = function (){
 }
 
 function insertRowIntoTable(data){
-
-}
-function loadHTMLTable(data) {
-    console.log("in loadhtml table"+ data);
     const table = document.querySelector('table tbody');
+    const isTableData = table.querySelector('.no-data');
 
-    if (data.length === 0) {
-        table.innerHTML = "<tr><td class='no-data' colspan='5'>No Data</td></tr>";
-    }
+    let tableHtml = "<tr>";
 
-    let tableHtml = "";
-
-    data.forEach(function ({id, name, date_added}) {
-        tableHtml += "<tr>";
+    data.forEach(function ({id, name, date}){
         tableHtml += `<td>${id}</td>`;
         tableHtml += `<td>${name}</td>`;
-        tableHtml += `<td>${new Date(date_added).toLocaleString()}</td>`;
+        tableHtml += `<td>${new Date(date).toLocaleString()}</td>`;
         tableHtml += `<td><button class="delete-row-btn" data-id=${id}>Delete</td>`;
         tableHtml += `<td><button class="edit-row-btn" data-id=${id}>Edit</td>`;
         tableHtml += "</tr>";
     });
 
-    table.innerHTML = tableHtml;
+}
+
+function deleteRowById(id){
+    console.log("Delete!" +id);
+}
+function loadHTMLTable(data) {
+    console.log("in loadhtml table"+ data.length);
+    const table = document.querySelector('table tbody');
+
+    if (data.length === 0) {
+        table.innerHTML = "<tr><td class='no-data' colspan='5'>No Data</td></tr>";
+    }
+    else {
+        let tableHtml = "";
+
+        data.forEach(function ({id, name, date}) {
+            tableHtml += "<tr>";
+            tableHtml += `<td>${id}</td>`;
+            tableHtml += `<td>${name}</td>`;
+            tableHtml += `<td>${new Date(date).toLocaleString()}</td>`;
+            tableHtml += `<td><button class="delete-row-btn" data-id=${id} onclick="deleteRowById(${id})">Delete</td>`;
+            tableHtml += `<td><button class="edit-row-btn" data-id=${id}>Edit</td>`;
+            tableHtml += "</tr>";
+        });
+
+        table.innerHTML = tableHtml;
+    }
+
+
 }

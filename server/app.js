@@ -4,6 +4,7 @@ const cors = require('cors');
 const env = require('dotenv');
 const path = require("path");
 const {response} = require("express");
+const QRCode = require("qrcode");
 env.config();
 
 const Database = require("./database");
@@ -20,6 +21,14 @@ app.post('/insert', (req, res) =>{
 
     const db = Database.getInstance();
     const result = db.insertName(name);
+
+    //Log QrCode:
+    QRCode.toFile('../out/code.png',"Encode this text in QR code", {
+        errorCorrectionLevel : 'H'
+    }, function (err) {
+        if (err) throw err;
+        console.log("QR Code Saved!")
+    });
 
     result.then(data => res.json({success : true}))
         .catch(err => console.log(err));

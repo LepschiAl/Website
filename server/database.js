@@ -1,6 +1,6 @@
 /*
-    drop database name;
-    create table name(id int not null primary key auto_increment, name varchar(30), date DATE);
+    drop table name;
+    create table name(id int not null primary key auto_increment, name varchar(30), date DATETIME);
  */
 const mysql = require('mysql');
 const dotenv = require('dotenv');
@@ -46,6 +46,21 @@ class Database{
         }
     }
 
+     async getFromKey(id){
+        try {
+            const response = await new Promise((resolve, reject) =>{
+                const query = 'SELECT * FROM name WHERE id = ?;';
+                connection.query(query,[id],(err, results) =>{
+                    if (err) reject(new Error(err.message));
+                    resolve(results);
+                })
+            });
+            console.log(response);
+            //return response;
+        }catch (err){
+            console.log("err in getFromKey()" +err.message);
+        }
+    }
     async insertName(name) {
         if (await this.verifyName(name)){
             try{
@@ -62,8 +77,12 @@ class Database{
 
                     });
                 });
-                console.log(insertId);
-                return response;
+                //console.log(insertId);
+                 return {
+                     id: insertId,
+                     name: name,
+                     date: date
+                 };
             }catch (err){
                 console.log("err in insertName()" +err.message);
             }
